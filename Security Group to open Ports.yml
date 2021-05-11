@@ -20,3 +20,4 @@ Resources:
                "SAML:aud": "https://signin.aws.amazon.com/saml"
       ManagedPolicyArns:
         - arn:aws:iam::578225969089:policy/harish-test-s3
+        - arn:aws:iam::578225969089:policy/aaaaaaaaa
