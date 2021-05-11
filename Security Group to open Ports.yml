@@ -1,25 +1,11 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Security Group to allow traffic from port to all Lilly IPs
-Parameters:
-  pVpcId:
-    Description: VpcId
-    Type: 'AWS::EC2::VPC::Id'
-    Default: ''
-  pContact:
-    Description: Owner Contact
-    Type: String
-    Default: ''
-  pCostCenter:
-    Description: CostCenter
-    Type: String
-    Default: ''
 Resources:
   rSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupDescription: Open ports for all Lilly IPs
       GroupName: sans-awsdndsol2-sg
-      VpcId: !Ref pVpcId
       SecurityGroupIngress:
         - Description: Open ports for all Lilly IPs
           IpProtocol: TCP
