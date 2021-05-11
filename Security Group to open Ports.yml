@@ -21,4 +21,3 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::578225969089:policy/harish-test-s3
         - arn:aws:iam::578225969089:policy/s3-test-bucket
-        - arn:aws:iam::578225969089:policy/aaaaaaaaa
