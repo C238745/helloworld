@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: This stacks deploys new client id IAM role and attach s3 bucket policy. 
+Parameters:
+ p0clientid:
+   Type: String
+   Description: client id role name that used to access Bucket 
+   Default: ''
+Resources:   
+  rBucketAcccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref p0clientid
+      PermissionsBoundary: !Sub 'arn:aws:iam::${AWS::AccountId}:policy/LZ-IAM-Boundary'  
+      MaxSessionDuration: 36000
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated:
+                - !Sub arn:aws:iam::${AWS::AccountId}:saml-provider/LillyUser
+            Action: sts:AssumeRoleWithSAML
+            Condition:
+              StringEquals:
+               "SAML:aud": "https://signin.aws.amazon.com/saml"
+  rBucketAccessPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
+    Properties:
+      ManagedPolicyName: s3-lly-flexvalidata-qa-rw
