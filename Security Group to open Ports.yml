@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Security Group to allow traffic from port to all Lilly IPs
+Parameters:
+  pVpcId:
+    Description: VpcId
+    Type: 'AWS::EC2::VPC::Id'
+    Default: ''
+  pContact:
+    Description: Owner Contact
+    Type: String
+    Default: ''
+  pCostCenter:
+    Description: CostCenter
+    Type: String
+    Default: ''
+Resources:
+  rSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Open ports for all Lilly IPs
+      GroupName: sans-awsdndsol2-sg
+      VpcId: !Ref pVpcId
+      SecurityGroupIngress:
+        - Description: Open ports for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '19090'
+          ToPort: '19090'
+          CidrIp: 40.0.0.0/10
+        - Description: Open ports for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '19090'
+          ToPort: '19090'
+          CidrIp: 40.144.0.0/12
+        - Description: Open ports for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '19090'
+          ToPort: '19090'
+          CidrIp: 40.160.0.0/11
+        - Description: Open ports for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '19090'
+          ToPort: '19090'
+          CidrIp: 40.192.0.0/10
+        - Description: Access the AWS Denodo client for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '19996'
+          ToPort: '19998'
+          CidrIp: 40.0.0.0/10
+        - Description: Access the AWS Denodo client for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '19996'
+          ToPort: '19998'
+          CidrIp: 40.144.0.0/12
+        - Description: Access the AWS Denodo client for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '9999'
+          ToPort: '19998'
+          CidrIp: 40.160.0.0/11
+        - Description: Access the AWS Denodo client for all Lilly IPs
+          IpProtocol: TCP
+          FromPort: '19996'
+          ToPort: '19998'
+          CidrIp: 40.192.0.0/10
+      Tags:
+        - Key: Name
+          Value: sans-awsdndsol2-sg
+        - Key: Contact
+          Value:
+            Ref: pContact
+        - Key: CostCenter
+          Value:
+            Ref: pCostCenter
+        - Key: Restricted
+          Value: Restricted
